@@ -12,6 +12,10 @@ const eslintConfig = defineConfig([
     "out/**",
     "build/**",
     "next-env.d.ts",
+    // Vendored registry code (shadcn / AI Elements CLIs overwrite local edits).
+    // Still type-checked by `tsc` and `next build`.
+    "src/components/ui/**",
+    "src/components/ai-elements/**",
   ]),
 ]);
 

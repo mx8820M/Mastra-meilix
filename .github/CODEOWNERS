@@ -1,0 +1,9 @@
+# Pull requests touching these paths need approval from the listed owners.
+# Enforced when branch protection on `main` has "Require review from Code Owners" enabled.
+
+*                                         @mx8820M
+/questionnaire/part-1-booklet-questions.md @mx8820M
+/.github/                                 @mx8820M
+/LICENSE.md                               @mx8820M
+**/package.json                           @mx8820M
+**/package-lock.json                      @mx8820M

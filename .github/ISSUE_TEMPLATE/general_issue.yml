@@ -1,0 +1,21 @@
+name: General issue
+description: Questions, documentation gaps, or discussion.
+title: "[Issue]: "
+labels: ["triage"]
+body:
+  - type: textarea
+    id: topic
+    attributes:
+      label: What is this about?
+      description: One topic per issue, please.
+    validations:
+      required: true
+  - type: textarea
+    id: context
+    attributes:
+      label: Context
+      description: Links, the file or question ID (e.g. Q09) concerned, what you've already tried.
+  - type: textarea
+    id: outcome
+    attributes:
+      label: What would a good outcome look like?

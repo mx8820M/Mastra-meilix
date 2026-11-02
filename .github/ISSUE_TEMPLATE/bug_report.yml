@@ -1,0 +1,58 @@
+name: Bug report
+description: Something doesn't work as documented.
+title: "[Bug]: "
+labels: ["bug", "triage"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for reporting! Please search existing issues first. For security problems, use **Security → Report a vulnerability** instead of a public issue.
+  - type: dropdown
+    id: area
+    attributes:
+      label: Area
+      options:
+        - Questionnaire
+        - Mastra backend (mastra-meilix/)
+        - Web UI (web/)
+        - Blueprint (connectors, env template, strategy template)
+        - Docs / wiki
+        - CI
+        - Other
+    validations:
+      required: true
+  - type: textarea
+    id: what-happened
+    attributes:
+      label: What happened?
+      description: A clear description of the bug.
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to reproduce
+      placeholder: |
+        1. Run `npm run dev` in mastra-meilix/
+        2. Open http://localhost:4111
+        3. ...
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected result
+    validations:
+      required: true
+  - type: textarea
+    id: environment
+    attributes:
+      label: Environment
+      description: OS, Node.js version, browser, model provider. Never paste API keys.
+      placeholder: "Windows 11, Node 24.1, Chrome 140, deepseek/deepseek-v4-pro"
+  - type: textarea
+    id: logs
+    attributes:
+      label: Logs or screenshots
+      description: Remove secrets and personal data first.
+      render: shell

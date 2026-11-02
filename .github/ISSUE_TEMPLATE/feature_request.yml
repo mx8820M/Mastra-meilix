@@ -1,0 +1,53 @@
+name: Feature request
+description: Propose a new question, connector, guide or UI feature.
+title: "[Feature]: "
+labels: ["enhancement", "triage"]
+body:
+  - type: dropdown
+    id: type
+    attributes:
+      label: Type
+      options:
+        - New questionnaire question
+        - Change to an existing question
+        - Connector (agent SDK / service)
+        - Blueprint template (env, strategy)
+        - Web UI
+        - Docs / guide
+        - Other
+    validations:
+      required: true
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem
+      description: What is hard or missing today? Who is affected?
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposed solution
+    validations:
+      required: true
+  - type: textarea
+    id: question-details
+    attributes:
+      label: For questionnaire changes
+      description: Fill this in if you selected a questionnaire type above.
+      placeholder: |
+        Question:
+        Expected answer type: (text / rating 1–5 / score 1–10 / yes-no + context / single choice / select or rank)
+        Source: (booklet page, docs link, or experience)
+        Intended uses: (U1–U6)
+        What the answer changes:
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternatives considered
+  - type: checkboxes
+    id: contribute
+    attributes:
+      label: Contribution
+      options:
+        - label: I'd like to open a pull request for this myself.

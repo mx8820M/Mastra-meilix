@@ -1,0 +1,67 @@
+# Strategy template
+# Describes which data sources an agent works with, what matters in them,
+# how often they are read, and how metrics are computed.
+# Copy this file into your project as `strategy.yaml` and replace the examples.
+# Related questionnaire answers: Q01, Q03, Q06, Q11, Q12, Q17.
+
+project:
+  name: example-app
+  goal: >
+    One or two sentences: what decisions or outputs should this strategy support?
+  owner: "@your-github-handle"          # who approves changes to this file (Q15)
+
+data_sources:
+  - id: support-tickets
+    description: Customer support tickets
+    type: api                            # api | database | files | web | mcp
+    location: "https://api.example.com/tickets"   # or a table name, path, MCP server
+    format: json                         # json | markdown | csv | html | pdf | text
+    sensitivity: personal-data           # public | internal | confidential | personal-data
+    trusted: false                       # false = written by outsiders → guardrails (Q20)
+    update_frequency: hourly             # realtime | hourly | daily | weekly | on-demand
+    importance: high                     # high | medium | low
+    what_matters:
+      - Product names mentioned
+      - Sentiment
+      - Time to first response
+    entities: [customer, product, ticket]   # domain vocabulary (Q17)
+
+  - id: product-docs
+    description: Product documentation
+    type: files
+    location: "./docs/**/*.md"
+    format: markdown
+    sensitivity: public
+    trusted: true
+    update_frequency: on-demand
+    importance: medium
+    what_matters:
+      - Feature descriptions used to answer questions
+
+metrics:
+  - id: weekly-negative-sentiment
+    description: Share of tickets with negative sentiment per product
+    sources: [support-tickets]
+    computation: >
+      Classify each ticket's sentiment with structured output
+      (negative | neutral | positive), then count per product per week.
+    model: cheap                         # cheap | default | strong (Q07 routing)
+    frequency: weekly
+    threshold:
+      alert_if_above: 0.25
+    output: report                       # report | dashboard | alert | none
+
+schedule:
+  timezone: Europe/Berlin
+  runs:
+    - metric: weekly-negative-sentiment
+      cron: "0 7 * * MON"
+
+budget:                                  # Q06
+  max_tokens_per_run: 200000
+  monthly_limit_usd: 50
+  on_limit: stop                         # stop | cheaper-model | ask
+
+guardrails:
+  human_approval_for: [sending-emails, publishing-reports]   # Q18
+  never: [deleting-data]                                     # Q14
